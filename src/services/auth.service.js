@@ -3,7 +3,7 @@ const { User } = require('../../models');
 const { generateToken } = require('../utils/jwt.util');
 
 class AuthSevice {
-    static async register({ username, email, password }) {
+    static async register({ username, email, role, password }) {
         
         const emailExists = await User.findOne({ where: { email } });
         if (emailExists) throw new Error('Email already exists');
@@ -16,6 +16,7 @@ class AuthSevice {
         await User.create({
             username,
             email,
+            role,
             password: hashedPassword
         });
         
@@ -30,7 +31,7 @@ class AuthSevice {
         if (!isPasswordValid) throw new Error('Invalid credentials');
         
         // Generate JWT token
-        const token = generateToken({ id: user.id, email: user.email });
+        const token = generateToken({ id: user.id, username: user.username, role: user.role });
 
         return { token };
     }

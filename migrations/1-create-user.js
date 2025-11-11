@@ -5,6 +5,7 @@ module.exports = {
             id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
             username: { type: Sequelize.STRING, allowNull: false },
             email: { type: Sequelize.STRING, allowNull: false, unique: true },
+            role: { type: Sequelize.ENUM('Customer', 'Admin'), defaultValue: 'Customer' },
             password: { type: Sequelize.STRING, allowNull: false },
         });
     },

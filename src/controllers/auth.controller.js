@@ -3,9 +3,9 @@ const AuthSevice = require('../services/auth.service');
 class AuthController {
     static async register(req, res) {
         try{            
-            const { username, email, password } = req.body;
+            const { username, email, role, password } = req.body;
             
-            const result = await AuthSevice.register({username, email, password});
+            const result = await AuthSevice.register({username, email, role, password});
             return res.status(201).json(result);
         }catch (error) {
             return res.status(400).json({ error: error.message });
