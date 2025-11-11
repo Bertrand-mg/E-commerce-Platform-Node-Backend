@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             // association definition
             Product.belongsTo(models.User, { foreignKey: "UserId" });
             Product.belongsTo(models.Order, { 
-                thorugh: models.OrderProducts, 
+                through: models.OrderProducts, 
                 foreignKey: "ProductId" });
         }
     }
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             stock: { type: DataTypes.INTEGER },
             category: { type: DataTypes.STRING }
         },
-        { sequelize, modelName: "Product" }
+        { sequelize, modelName: "Product" , timestamps: false}
     );
     return Product;
 }

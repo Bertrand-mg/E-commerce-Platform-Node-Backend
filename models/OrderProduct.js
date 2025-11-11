@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             quantity: { type: DataTypes.INTEGER, allowNull: false }
         },
-        { sequelize, modelName: "OrderProducts" }
+        { sequelize, modelName: "OrderProducts" , timestamps: false}
     );
     return OrderProduct;
 }

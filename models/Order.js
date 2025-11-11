@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
             UserId: { type: DataTypes.UUID, allowNull: false },
         },
-        { sequelize, modelName: "Order" }
+        { sequelize, modelName: "Order" , timestamps: false}
     );
     return Order;
 }
