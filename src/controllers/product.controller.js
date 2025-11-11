@@ -24,6 +24,14 @@ class ProductController {
             return res.status(404).json({ error: error.message });
         }
     }
+    static async getAllProducts(req, res) {
+        try {
+            const products = await ProductService.getAllProducts();
+            return res.status(200).json(products);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = ProductController;

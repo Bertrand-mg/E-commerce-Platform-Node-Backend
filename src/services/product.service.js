@@ -15,7 +15,6 @@ class ProductService {
     }
     static async updateProduct(productId, { name, description, price, stock, category }) {
         const product = await Product.findByPk(productId);
-        if (!product) throw new Error('Product Id not found');
 
         product.name = name || product.name;
         product.description = description || product.description;
@@ -25,6 +24,24 @@ class ProductService {
         
         await product.save();
         return product;
+    }
+    static async getAllProducts(page =1 , pageSize =10) {
+        
+        const limit = pageSize;
+        const offset = (page - 1) * pageSize;
+
+        const { count, rows} = await Product.findAndCountAll({
+            limit,
+            offset,
+            attributes: ['id', 'name', 'description', 'price', 'stock', 'category'],
+        });
+        return {
+            currentPage: page,
+            pageSize,
+            totalPages: Math.ceil(count / limit),
+            totalProducts: count,
+            products: rows,
+        };
     }
 
 }

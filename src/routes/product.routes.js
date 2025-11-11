@@ -14,5 +14,6 @@ router.put('/:id',
     AuthMiddleware.Authenticate, 
     AuthMiddleware.Authoroization("Admin"),
     createProductValidation, validationHandler, ProductController.updateProduct);
+router.get('/', ProductController.getAllProducts);
 
 module.exports = router;
