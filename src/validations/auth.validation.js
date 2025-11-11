@@ -3,7 +3,7 @@ const { body } = require('express-validator');
 const registerValidation = [
     body('username')
         .notEmpty().withMessage('Username is required')
-        .isAplphanumeric().withMessage('Username must be alphanumeric'),
+        .isAlphanumeric().withMessage('Username must be alphanumeric'),
 
     body('email')
         .notEmpty().withMessage('Email is required')
@@ -19,6 +19,14 @@ const registerValidation = [
 
 ];
 
+const loginValidation = [
+    body('email')
+        .notEmpty().withMessage('Email is required')
+        .isEmail().withMessage('Invalid email format'),
+    body('password')
+        .notEmpty().withMessage('Password is required')
+];
+
 module.exports = {
-    registerValidation
+    registerValidation, loginValidation
 };
