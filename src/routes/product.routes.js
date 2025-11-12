@@ -15,5 +15,9 @@ router.put('/:id',
     AuthMiddleware.Authoroization("Admin"),
     createProductValidation, validationHandler, ProductController.updateProduct);
 router.get('/', ProductController.getAllProducts);
+router.get('/:id', ProductController.getProductById);
+router.delete('/:id', 
+    AuthMiddleware.Authenticate, 
+    AuthMiddleware.Authoroization("Admin"), ProductController.deleteProduct);
 
 module.exports = router;

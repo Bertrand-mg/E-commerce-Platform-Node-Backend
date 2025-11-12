@@ -1,4 +1,5 @@
 const { Product } = require('../../models');
+const { Op } = require('sequelize');
 
 class ProductService {
     static async createProduct({ name, description, price, stock, category, UserId }) {
@@ -25,16 +26,33 @@ class ProductService {
         await product.save();
         return product;
     }
-    static async getAllProducts(page =1 , pageSize =10) {
+    static async getAllProducts( searchKeyword ) {
         
+        const page =1 ;
+        const pageSize =10;
         const limit = pageSize;
         const offset = (page - 1) * pageSize;
 
-        const { count, rows} = await Product.findAndCountAll({
-            limit,
-            offset,
-            attributes: ['id', 'name', 'description', 'price', 'stock', 'category'],
-        });
+        let count, rows;
+        
+        if(!searchKeyword){
+            ({ count, rows} = await Product.findAndCountAll({
+                limit,
+                offset,
+                attributes: ['id', 'name', 'description', 'price', 'stock', 'category'],
+            }));
+        }else{
+            ({ count, rows} = await Product.findAndCountAll({
+                limit,
+                offset,
+                where: {
+                    name: { [Op.iLike]: `%${searchKeyword}%`  },
+                },
+                attributes: ['id', 'name', 'description', 'price', 'stock', 'category'],
+            }));
+        }
+                    
+        
         return {
             currentPage: page,
             pageSize,
