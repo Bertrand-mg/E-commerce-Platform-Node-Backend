@@ -20,8 +20,9 @@ module.exports = (sequelize, DataTypes) => {
             status: { type: DataTypes.STRING },
 
             UserId: { type: DataTypes.UUID, allowNull: false },
+            createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
         },
-        { sequelize, modelName: "Order" , timestamps: false}
+        { sequelize, modelName: "Order" , timestamps: true, createdAt: 'createdAt', updatedAt: false}
     );
     return Order;
 }

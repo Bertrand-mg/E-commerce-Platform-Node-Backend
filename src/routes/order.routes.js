@@ -8,8 +8,10 @@ const validationHandler = require('../middlewares/validationHandler');
 router.post('/', 
     AuthMiddleware.Authenticate,
     AuthMiddleware.Authorization("User"),
-    validationHandler,
     OrderController.createOrder);
-
+router.get('/', 
+    AuthMiddleware.Authenticate,
+    AuthMiddleware.Authorization("User"),
+    OrderController.getOrderByUserId);
 
 module.exports = router;

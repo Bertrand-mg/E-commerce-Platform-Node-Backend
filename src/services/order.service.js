@@ -73,6 +73,29 @@ class OrderService{
             throw error;
         }
     }
+
+    static async getOrdersByUserId(userId){
+        try{
+            const orders = await Order.findAll({
+                where: { UserId: userId },
+                include: [
+                    {
+                        model: Product,
+                        through: { attributes: ['quantity'] },
+                        attributes: ['id', 'name', 'price']
+                    }
+                ]
+            }); 
+            return orders.map(order => ({
+                order_id: order.id,
+                status: order.status,
+                total_price: order.totalprice,
+                created_at: order.createdAt,
+            }));
+        }catch(error){
+            throw error;
+        }
+    }
 }
 
 module.exports = OrderService;
