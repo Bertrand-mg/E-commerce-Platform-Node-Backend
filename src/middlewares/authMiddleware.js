@@ -14,7 +14,7 @@ class AuthMiddleware {
             return res.status(400).json({ error: 'Invalid token.' });
         }
     }
-    static Authoroization(roles = []) {
+    static Authorization(roles = []) {
         return (req, res, next) => {
             if (!roles.includes(req.user.role)) {
                 return res.status(403).json({ error: 'Access denied. You do not have permission to perform this action.' });

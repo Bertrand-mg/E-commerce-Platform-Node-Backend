@@ -8,16 +8,16 @@ const AuthMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/', 
     AuthMiddleware.Authenticate, 
-    AuthMiddleware.Authoroization("Admin"),  
+    AuthMiddleware.Authorization("Admin"),  
     createProductValidation, validationHandler, ProductController.createProduct);
 router.put('/:id', 
     AuthMiddleware.Authenticate, 
-    AuthMiddleware.Authoroization("Admin"),
+    AuthMiddleware.Authorization("Admin"),
     createProductValidation, validationHandler, ProductController.updateProduct);
 router.get('/', ProductController.getAllProducts);
 router.get('/:id', ProductController.getProductById);
 router.delete('/:id', 
     AuthMiddleware.Authenticate, 
-    AuthMiddleware.Authoroization("Admin"), ProductController.deleteProduct);
+    AuthMiddleware.Authorization("Admin"), ProductController.deleteProduct);
 
 module.exports = router;
