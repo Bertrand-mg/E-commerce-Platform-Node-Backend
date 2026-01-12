@@ -1,4 +1,5 @@
 ﻿# E-commerce-Platform-Node-Backend
+[![Coverage Status](https://coveralls.io/repos/github/Bertrand-mg/E-commerce-Platform-Node-Backend/badge.svg?branch=main)](https://coveralls.io/github/Bertrand-mg/E-commerce-Platform-Node-Backend?branch=main)
 
 ## Technologies Used
 
@@ -71,3 +72,4 @@ npx sequelize-cli db:migrate
 
 
 This will create or update the necessary database tables as per your models.
+
